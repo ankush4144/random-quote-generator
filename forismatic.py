@@ -20,4 +20,12 @@ if resp.status_code == 200:
 else:
     raise Exception("Failed to fetch data from API")
 
-print(data['quoteText'] + '.\n' + data['quoteAuthor'])
+qoute = data['quoteText'] + '.\n' + data['quoteAuthor']
+
+print(quote)
+
+filename = "quote.txt"
+
+with open(filename, "w") as file:
+    file.write(quote)
+
