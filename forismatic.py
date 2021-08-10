@@ -10,7 +10,13 @@ resp = requests.get(url=url)
 
 if resp.status_code == 200:
     print("API RESPONSE", resp.content)
-    data = resp.json()
+    try:
+        try:
+            data = resp.json()
+        except json.decoder.JSONDecodeError:
+            data = eval(resp.content)
+    except:
+        raise Exception("Failed to decode the response received from API")
 else:
     raise Exception("Failed to fetch data from API")
 
