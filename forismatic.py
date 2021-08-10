@@ -20,7 +20,7 @@ if resp.status_code == 200:
 else:
     raise Exception("Failed to fetch data from API")
 
-qoute = data['quoteText'] + '.\n' + data['quoteAuthor']
+quote = data['quoteText'] + '.\n' + data['quoteAuthor']
 
 print(quote)
 
