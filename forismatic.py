@@ -10,7 +10,7 @@ console = logging.StreamHandler()
 console.setLevel(logging.INFO)
 console.setFormatter(logging.Formatter('[%(asctime)s]-[%(levelname)s][%(threadName)s]:%(message)s'))
 # Create and configure logger
-logging.basicConfig(filename="quote_generator-{str(datetime.now())}.log",
+logging.basicConfig(filename=f"quote_generator-{str(datetime.now())}.log",
                     format='[%(asctime)s]-[%(levelname)s][%(threadName)s]:%(message)s',
                     filemode='w',
                     level=logging.DEBUG)
