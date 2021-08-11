@@ -1,6 +1,6 @@
 pipeline {
-    agent CENTOS_SLAVE
-
+    agent any
+    
     stages {
         stage('Build') {
             steps {
