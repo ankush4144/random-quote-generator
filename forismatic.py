@@ -3,13 +3,31 @@
 
 import requests
 import json
+import logging
+from datetime import datetime
+  
+#Create and configure logger
+logging.basicConfig(filename=f"quote_generator-{str(datetime.now())}.log",
+                    format="%(asctime)s — %(name)s — %(levelname)s — %(message)s",
+                    filemode='w')
+  
+#Creating an object
+logger=logging.getLogger()
+  
+#Setting the threshold of logger to DEBUG
+logger.setLevel(logging.INFO)
+
  
 url = 'https://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en'
- 
+
+logger.info(f"Sending GET request to API - {url}")
 resp = requests.get(url=url)
+logger.debug(f"STATUS CODE - {resp.status_code}")
+logger.debug(f"API RESPONSE - {resp.content}")
 
 if resp.status_code == 200:
-    print("API RESPONSE", resp.content)
+    logger.info("API response request successful with Status Code - 200")
+    logger.info("Attempting to render data received from API response to JSON")
     try:
         try:
             data = resp.json()
@@ -22,10 +40,16 @@ else:
 
 quote = data['quoteText'] + '.\n' + data['quoteAuthor']
 
-print(quote)
+logger.info(f"Quote received from API \n{quote}")
 
 filename = "quote.txt"
 
-with open(filename, "w") as file:
-    file.write(quote)
+logger.debug("Writing the quote to a file")
+try:
+    with open(filename, "w") as file:
+        file.write(quote)
+except Exception as err:
+    raise Exception(f"Failed to write the quote to file due to err - {str(err)}")
+
+logger.info(f"Successfully wrote quote {quote} to file {filename}")
 
