@@ -2,19 +2,19 @@ pipeline {
     agent any
     
     stages {
-        stage('Build') {
+        stage('Run') {
             steps {
-                echo 'Building..'
+                echo 'Running Python Script..'
+                sh 'python3 --version'
+                sh 'python3 forismatic.py'
             }
         }
-        stage('Test') {
+        stage('Create Artifact') {
             steps {
-                echo 'Testing..'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
+                echo 'Creating Artifacts..'
+                script {
+                    archiveArtifacts artifacts: 'quote.txt'
+                }
             }
         }
     }
