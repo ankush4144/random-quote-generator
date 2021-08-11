@@ -31,7 +31,7 @@ if resp.status_code == 200:
     logger.info("API response request successful with Status Code - 200")
     logger.info("Attempting to render data received from API response to JSON")
     # quote response received from API
-    quote = str(resp.content)
+    quote = resp.content.decode()
 else:
     raise Exception("Failed to fetch data from API")
 
