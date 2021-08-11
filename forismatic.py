@@ -8,9 +8,11 @@ from datetime import datetime
   
 #Create and configure logger
 logging.basicConfig(filename=f"quote_generator-{str(datetime.now())}.log",
-                    format="%(asctime)s — %(name)s — %(levelname)s — %(message)s",
+                    format="[%(asctime)s] [%(name)s] [%(levelname)s] : %(message)s",
                     filemode='w')
-  
+
+logging.getLogger().addHandler(logging.StreamHandler())
+
 #Creating an object
 logger=logging.getLogger()
   
