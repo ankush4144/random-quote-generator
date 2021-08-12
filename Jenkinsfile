@@ -9,6 +9,7 @@ pipeline {
                 echo 'Running Python Script..'
                 sh 'python3 --version'
                 sh 'python3 forismatic.py'
+                script { quote = sh 'cat quote.txt' } 
             }
         }
         stage('Create Artifact') {
@@ -18,6 +19,9 @@ pipeline {
                     archiveArtifacts artifacts: 'quote.txt'
                 }
             }
+        }
+        stage('Create Webpage') {
+            build job: 'Quote_WebPage_Creator', parameters: [ string(name: 'Quote', value:"${quote}") ]
         }
     }
 }
