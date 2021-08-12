@@ -20,14 +20,18 @@ pipeline {
         stage('Create Artifact') {
             steps {
                 echo 'Creating Artifacts..'
-                script {
-                    archiveArtifacts artifacts: 'quote.txt'
-                }
+                archiveArtifacts artifacts: 'quote.txt'
             }
         }
         stage('Create Webpage') {
             steps {
                 build job: 'Quote_WebPage_Creator', parameters: [ string(name: 'Quote', value:"${quote}") ]
+            }
+        }
+        stage('Pull Artifact') {
+            steps {
+                copyArtifacts filter: 'quote.html', fingerprintArtifacts: true, projectName: 'Quote_WebPage_Creator', lastSuccessful: true
+                archiveArtifacts artifacts: 'quote.html'
             }
         }
     }
