@@ -21,7 +21,9 @@ pipeline {
             }
         }
         stage('Create Webpage') {
-            build job: 'Quote_WebPage_Creator', parameters: [ string(name: 'Quote', value:"${quote}") ]
+            steps {
+                build job: 'Quote_WebPage_Creator', parameters: [ string(name: 'Quote', value:"${quote}") ]
+            }
         }
     }
 }
