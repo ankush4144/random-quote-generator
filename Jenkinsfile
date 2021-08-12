@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        label 'CENTOS_SLAVE'
+    }
     
     stages {
         stage('Run') {
