@@ -30,7 +30,7 @@ pipeline {
         }
         stage('Pull Artifact') {
             steps {
-                copyArtifacts filter: 'quote.html', fingerprintArtifacts: true, projectName: 'Quote_WebPage_Creator', lastSuccessful: true
+                copyArtifacts filter: 'quote.html', fingerprintArtifacts: true, projectName: 'Quote_WebPage_Creator', selector: lastSuccessful(true)
                 archiveArtifacts artifacts: 'quote.html'
             }
         }
