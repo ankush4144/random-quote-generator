@@ -37,7 +37,7 @@ pipeline {
         stage('Deploy Webpage') {
             steps {
                 sh 'sudo mkdir -p /usr/share/tomcat/webapps/quote'
-                sh 'sudo cp quote.html /usr/share/tomcat/webapps/quote'
+                sh 'sudo cp quote.html /usr/share/tomcat/webapps/quote/index.html'
             }
         }
     }
