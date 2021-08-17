@@ -11,7 +11,6 @@ pipeline {
                 echo 'Running Python Script..'
                 sh 'python3 --version'
                 sh 'python3 forismatic.py'
-                script { quote = sh 'cat quote.txt' } 
                 script {
                     quote = sh(returnStdout: true, script: 'echo `cat quote.txt`').trim()
                 }
